@@ -1,5 +1,6 @@
 import React from 'react';
-
+import { Editor } from "react-draft-wysiwyg";
+import
 function App() {
   const [text, setText] = React.useState('');
   return (
