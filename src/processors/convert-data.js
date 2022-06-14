@@ -1,12 +1,12 @@
-import { convertToHTML } from 'draft-convert';
-import DOMPurify from 'dompurify';
+import { convertToRaw } from 'draft-js';
+import draftToHTML from 'draftjs-to-html';
 
+/**
+ * Converts a mapped object to HTML
+ * @param {*} editorState
+ * @returns string
+ */
 export const convertContentToHTML = (editorState) => {
-  const content = editorState?.getCurrentContent();
-  return convertToHTML(content);
-};
-
-export const createMarkup = (jsContent) => {
-  const htmlContent = DOMPurify.sanitize(jsContent);
-  return { __html: htmlContent };
+  const content = convertToRaw(editorState?.getCurrentContent());
+  return draftToHTML(content);
 };

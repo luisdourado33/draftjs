@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 
 import { EditorState } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
@@ -23,7 +23,6 @@ const RichTextEditor = () => {
   return (
     <>
       <div className="preview">
-        <h1 className="title">Preview</h1>
         <div dangerouslySetInnerHTML={{ __html: convertedContent }}></div>
       </div>
       <div className="container">
