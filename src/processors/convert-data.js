@@ -7,6 +7,6 @@ import draftToHTML from 'draftjs-to-html';
  * @returns string
  */
 export const convertContentToHTML = (editorState) => {
-  const content = convertToRaw(editorState?.getCurrentContent());
-  return draftToHTML(content);
+  const rawContent = convertToRaw(editorState?.getCurrentContent());
+  return draftToHTML(rawContent);
 };
