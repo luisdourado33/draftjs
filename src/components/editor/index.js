@@ -22,9 +22,6 @@ const RichTextEditor = () => {
 
   return (
     <>
-      <div className="preview">
-        <div dangerouslySetInnerHTML={{ __html: convertedContent }}></div>
-      </div>
       <div className="container">
         <Editor
           editorState={editorState}
@@ -32,7 +29,17 @@ const RichTextEditor = () => {
           localization={{
             locale: 'pt',
           }}
+          toolbar={{
+            image: {
+              inDropdown: false,
+              urlEnabled: false,
+              uploadEnabled: false,
+            },
+          }}
         />
+      </div>
+      <div className="preview">
+        <div dangerouslySetInnerHTML={{ __html: convertedContent }}></div>
       </div>
     </>
   );
