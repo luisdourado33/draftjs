@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Component, useState } from 'react';
 
 import { EditorState } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
@@ -6,23 +6,36 @@ import { Editor } from 'react-draft-wysiwyg';
 import './editor.styles.css';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
-import PreviewContainer from '../preview';
+import { convertContentToHTML } from '../../processors/convert-data';
 
 const RichTextEditor = () => {
   let initialEditorState = () => EditorState.createEmpty();
   const [editorState, setEditorState] = useState(initialEditorState);
+  const [convertedContent, setConvertedContent] = useState('');
+
+  const onEditorStateChange = (state) => {
+    setEditorState(state);
+
+    const contentParsed = convertContentToHTML(state);
+    setConvertedContent(contentParsed);
+  };
 
   return (
-    <div className="editor-container">
-      <PreviewContainer />
-      <Editor
-        editorState={editorState}
-        onEditorStateChange={setEditorState}
-        wrapperClassName="wrapper-class"
-        editorClassName="editor-class"
-        toolbarClassName="toolbar-class"
-      />
-    </div>
+    <>
+      <div className="preview">
+        <h1 className="title">Preview</h1>
+        <div dangerouslySetInnerHTML={{ __html: convertedContent }}></div>
+      </div>
+      <div className="container">
+        <Editor
+          editorState={editorState}
+          onEditorStateChange={onEditorStateChange}
+          localization={{
+            locale: 'pt',
+          }}
+        />
+      </div>
+    </>
   );
 };
 
